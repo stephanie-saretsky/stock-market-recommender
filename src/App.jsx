@@ -9,8 +9,10 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Form />
-        <Table />
+        <div className="global">
+          <Form />
+          <Table />
+        </div>
         <Footer />
       </div>
     );
