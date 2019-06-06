@@ -7,9 +7,13 @@ class UnconnectedTable extends Component {
     console.log(this.props.price, "PRICE");
     console.log(this.props.rec, "REC");
     return (
-      <div>
-        I will be a table with {this.props.stock} and {this.props.price}
-        this is my {this.props.rating}
+      <div className="table">
+        <p className="tableLabel">Stock Symbol</p>
+        <p className="tableLabel">Today's Closing Price ($)</p>
+        <p className="tableLabel">Recommendation</p>
+        <p className="stock">{this.props.stock}</p>
+        <p className="price">{this.props.price}</p>
+        <p className="rating">{this.props.rating}</p>
       </div>
     );
   };

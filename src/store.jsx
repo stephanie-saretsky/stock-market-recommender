@@ -18,7 +18,7 @@ let reducer = (state, action) => {
 
 let store = createStore(
   reducer,
-  { rating: "", price: 0, counts: 0, symbol: "" },
+  { rating: "", price: undefined, counts: 0, symbol: "" },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

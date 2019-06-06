@@ -49,19 +49,19 @@ class UnconnectedForm extends Component {
 
   recommendationAlgorithm = (price, counts) => {
     if (counts > 20 && price > 50) {
-      this.props.dispatch({ type: "rating", value: "sell" });
+      this.props.dispatch({ type: "rating", value: "Sell" });
     } else if (counts > 20 && 15 < price < 50) {
-      this.props.dispatch({ type: "rating", value: "hold" });
+      this.props.dispatch({ type: "rating", value: "Hold" });
     } else if (counts < 20 || 15 < price < 50) {
-      this.props.dispatch({ type: "rating", value: "buy" });
+      this.props.dispatch({ type: "rating", value: "Buy" });
     }
+    this.props.dispatch({ type: "symbol", value: this.state.symbol });
   };
 
   handleSymbol = event => {
     console.log(event.target.value);
     let newInput = event.target.value;
     this.setState({ symbol: newInput });
-    this.props.dispatch({ type: "symbol", value: newInput });
   };
 
   handlePurchase = event => {
@@ -91,7 +91,7 @@ class UnconnectedForm extends Component {
       <div>
         <h3 className="form-title">Should You Buy, Sell, or Hold?</h3>
         <h4 className="sub-title">
-          Compare Average Stock Price To The Company's Social Media Posts
+          Analysis of Social Media on Stock Performance
         </h4>
         <form className="stock-form" onSubmit={this.handleSubmit}>
           <label htmlFor="symbolInput">Stock Symbol:</label>
@@ -107,14 +107,14 @@ class UnconnectedForm extends Component {
             <option value="facebook">Facebook</option>
             <option value="instagram">Instagram</option>
           </select>
-          <label htmlFor="dates">Time Span In Days:</label>
+          <label htmlFor="dates">Time Span</label>
           <select id="dates" name="dates" ref={this.dateRef}>
-            <option value="10">10</option>
-            <option value="9">9</option>
-            <option value="8">8</option>
-            <option value="7">7</option>
-            <option value="9">6</option>
-            <option value="5">5</option>
+            <option value="10">10 Days</option>
+            <option value="9">9 Days</option>
+            <option value="8">8 Days</option>
+            <option value="7">7 Days</option>
+            <option value="9">6 Days</option>
+            <option value="5">5 Days</option>
           </select>
           {/* <label htmlFor="purchase">Purchase Price:</label>
           <input
