@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Alegreya", serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
@@ -36,4 +36,94 @@ body {
   color: rgb(204, 153, 51);
   align-content: center;
   margin-top: 10px;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 50px;
+}
+.sub-title {
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 40px;
+}
+
+.stock-form {
+  margin-bottom: 20px;
+  border: 2px solid #000;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  background-color: white;
+  /* max-width: 85%; */
+}
+.stock-form input {
+  width: 33.33%;
+  padding: 10px;
+  /* margin-right: 10px; */
+  line-height: 1;
+  font-size: 1.2rem;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  background: #fff;
+}
+
+.stock-form select {
+  width: 15%;
+  padding: 10px;
+  margin-right: 12px;
+  line-height: 1;
+  font-size: 1.2rem;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  background: #fff;
+}
+
+label {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.stock-form input:focus,
+.stock-form select:focus {
+  outline: 0;
+  background: #fef2de;
+}
+.stock-form textarea {
+  width: 100%;
+}
+.stock-form input:last-of-type {
+  width: 100%;
+}
+input[type="submit"] {
+  width: 100%;
+  border: 0;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid #000;
+  font-weight: 600;
+  font-size: 1.5rem;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  position: relative;
+  z-index: 2;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  color: rgb(47, 99, 114);
 }

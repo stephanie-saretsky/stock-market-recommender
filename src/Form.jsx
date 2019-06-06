@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-class Form extends Component {
+class UnconnectedForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -35,22 +36,32 @@ class Form extends Component {
     this.setState({ price: avg });
     //push the price of the last day to store
     let endPrice = stockPrice[stockPrice.length - 1];
-    this.props.dispatch({ type: "stock-price", price: endPrice });
+    this.props.dispatch({ type: "stock-price", value: endPrice });
   };
 
   socialMediaCountGenerator = (symbol, social) => {
     // fetch from backend - send Symbol plus given social network which will return post number
+    //future feature to evaluate negative posts from positive
     let postNumber = Math.floor(Math.random() * 50 + 1);
     this.setState({ counts: postNumber });
-    this.props.dispatch({ type: "socialMedia-counts", counts: postNumber });
+    this.props.dispatch({ type: "socialMedia-counts", value: postNumber });
   };
 
-  recommendationAlgorithm = (price, counts) => {};
+  recommendationAlgorithm = (price, counts) => {
+    if (counts > 20 && price > 50) {
+      this.props.dispatch({ type: "rating", value: "sell" });
+    } else if (counts > 20 && 15 < price < 50) {
+      this.props.dispatch({ type: "rating", value: "hold" });
+    } else if (counts < 20 || 15 < price < 50) {
+      this.props.dispatch({ type: "rating", value: "buy" });
+    }
+  };
 
   handleSymbol = event => {
     console.log(event.target.value);
     let newInput = event.target.value;
     this.setState({ symbol: newInput });
+    this.props.dispatch({ type: "symbol", value: newInput });
   };
 
   handlePurchase = event => {
@@ -78,10 +89,10 @@ class Form extends Component {
   render = () => {
     return (
       <div>
-        <h3 className="form-title">
-          Compare Stock Price and Social Media Posts
-        </h3>
-        <h4>Get Recommendation on Buy/Sell/Hold</h4>
+        <h3 className="form-title">Should You Buy, Sell, or Hold?</h3>
+        <h4 className="sub-title">
+          Compare Average Stock Price To The Company's Social Media Posts
+        </h4>
         <form className="stock-form" onSubmit={this.handleSubmit}>
           <label htmlFor="symbolInput">Stock Symbol:</label>
           <input
@@ -96,7 +107,7 @@ class Form extends Component {
             <option value="facebook">Facebook</option>
             <option value="instagram">Instagram</option>
           </select>
-          <label htmlFor="dates">Time Span To Compare:</label>
+          <label htmlFor="dates">Time Span In Days:</label>
           <select id="dates" name="dates" ref={this.dateRef}>
             <option value="10">10</option>
             <option value="9">9</option>
@@ -105,19 +116,21 @@ class Form extends Component {
             <option value="9">6</option>
             <option value="5">5</option>
           </select>
-          <label htmlFor="purchase">Purchase Price:</label>
+          {/* <label htmlFor="purchase">Purchase Price:</label>
           <input
             id="purchase"
             name="purchase price"
             type="text"
             className="input"
             onChange={this.handlePurchase}
-          />
+          /> */}
           <input className="submit" type="submit" value="submit" />
         </form>
       </div>
     );
   };
 }
+
+let Form = connect()(UnconnectedForm);
 
 export default Form;
