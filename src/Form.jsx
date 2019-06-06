@@ -25,6 +25,7 @@ class UnconnectedForm extends Component {
       stockPrice.push(d);
     }
     console.log(stockPrice, "STOCK PRICE");
+    this.props.dispatch({ type: "daily-price", value: stockPrice });
     //find the average for the recommendation
     let sum = 0;
     for (let i = 0; i < stockPrice.length; i++) {
