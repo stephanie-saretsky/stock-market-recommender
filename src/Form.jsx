@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class UnconnectedForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       symbol: "",
       social: "",
-      dates: 0,
       price: 0,
-      counts: 0,
-      purchase: 0
+      counts: 0
       //risk ratio should be calculated
       //constants like inflation and interest rates
     };
@@ -21,7 +19,7 @@ class UnconnectedForm extends Component {
     let stockPrice = [];
     //create array with daily stock price based on time span
     for (let i = 0; i < dates; i++) {
-      let d = Math.floor(Math.random() * 100 + 1);
+      let d = Math.floor(Math.random() * (50 - 15 + 1) + 15);
       stockPrice.push(d);
     }
     console.log(stockPrice, "STOCK PRICE");
@@ -43,17 +41,18 @@ class UnconnectedForm extends Component {
   socialMediaCountGenerator = (symbol, social) => {
     // fetch from backend - send Symbol plus given social network which will return post number
     //future feature to evaluate negative posts from positive
-    let postNumber = Math.floor(Math.random() * 50 + 1);
+    let postNumber = Math.floor(Math.random() * 20 + 1);
     this.setState({ counts: postNumber });
     this.props.dispatch({ type: "socialMedia-counts", value: postNumber });
   };
 
   recommendationAlgorithm = (price, counts) => {
-    if (counts > 20 && price > 50) {
+    console.log(price, "PRICE", counts, "COUNTS");
+    if (counts > 10 && 30 < price < 50) {
       this.props.dispatch({ type: "rating", value: "Sell" });
-    } else if (counts > 20 && 15 < price < 50) {
+    } else if (counts > 10 && 20 < price < 30) {
       this.props.dispatch({ type: "rating", value: "Hold" });
-    } else if (counts < 20 || 15 < price < 50) {
+    } else if (counts < 10 || 15 < price < 20) {
       this.props.dispatch({ type: "rating", value: "Buy" });
     }
     this.props.dispatch({ type: "symbol", value: this.state.symbol });
@@ -81,9 +80,17 @@ class UnconnectedForm extends Component {
     //stock price and social media are mock data from backend. use math.random
     this.stockPriceGenerator(symbol, dates); // push to store after
     this.socialMediaCountGenerator(symbol, social); // push to store after
-
+    console.log(
+      this.state.price,
+      "STATE PRICE",
+      this.state.counts,
+      "STATE COUNTS"
+    );
     //recommendation takes the results of the other 2 functions as the arguments
-    this.recommendationAlgorithm(this.state.price, this.state.counts); // push to store after
+    setTimeout(
+      this.recommendationAlgorithm(this.state.price, this.state.counts),
+      100000
+    ); // push to store after
   };
 
   // form with inputs for: stock symbol, social network, time window (Default 10 days)

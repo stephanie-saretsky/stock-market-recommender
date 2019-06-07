@@ -3,25 +3,34 @@ import { connect } from "react-redux";
 
 class UnconnectedTable extends Component {
   render = () => {
-    console.log(this.props.rating, "RATING");
-    console.log(this.props.price, "PRICE");
-    console.log(this.props.rec, "REC");
     let stocks = this.props.daily.join(", ");
     return (
       <div>
-        <div className="table1">
-          <p className="tableLabel">Social Media Posts</p>
-          <p className="tableLabel">Daily Closing Price ($)</p>
-          <p className="counts">{this.props.social}</p>
+        <table className="table2">
+          <tfoot>
+            <tr>
+              <td>Recommendation</td>
+              <td>{this.props.rating}</td>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr>
+              <td>Symbol</td>
+              <td>{this.props.stock}</td>
+            </tr>
+            <tr>
+              <td>Closing Price ($)</td>
+              <td>{this.props.price}</td>
+            </tr>
+            <tr>
+              <td>Social Media Count</td>
+              <td>{this.props.social}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="row">
+          <p className="rowLabel">Daily Closing Price Within Time Span ($)</p>
           <p className="stockArray">{stocks}</p>
-        </div>
-        <div className="table2">
-          <p className="tableLabel">Stock Symbol</p>
-          <p className="tableLabel">Today's Closing Price ($)</p>
-          <p className="tableLabel">Recommendation</p>
-          <p className="stock">{this.props.stock}</p>
-          <p className="price">{this.props.price}</p>
-          <p className="rating">{this.props.rating}</p>
         </div>
       </div>
     );
