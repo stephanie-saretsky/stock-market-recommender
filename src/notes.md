@@ -1,4 +1,4 @@
-To approach this challenge, I started by writing out all of the necessary requirements on paper, and drew out an outline of how I wanted the app to look.
+To approach this challenge, I started by writing out all of the necessary requirements on paper, and drew out an mockup of how I wanted the app to look.
 
 I know very little of the stock market, so I started by researching the terminology and math behind it. I decided to create a basic form that allows the user to select which stock they want, the social network, and the time span between 5-10 days in the past. The form also has labels to make it accessible to e-readers.
 
