@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class UnconnectedForm extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       symbol: "",
       social: "",
       price: 0,
       counts: 0
-      //risk ratio should be calculated
-      //constants like inflation and interest rates
     };
   }
 
@@ -64,11 +62,11 @@ class UnconnectedForm extends Component {
     this.setState({ symbol: newInput });
   };
 
-  handlePurchase = event => {
-    console.log(event.target.value);
-    let newInput = event.target.value;
-    this.setState({ purchase: newInput });
-  };
+  //   handlePurchase = event => {
+  //     console.log(event.target.value);
+  //     let newInput = event.target.value;
+  //     this.setState({ purchase: newInput });
+  //   };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -80,17 +78,12 @@ class UnconnectedForm extends Component {
     //stock price and social media are mock data from backend. use math.random
     this.stockPriceGenerator(symbol, dates); // push to store after
     this.socialMediaCountGenerator(symbol, social); // push to store after
-    console.log(
-      this.state.price,
-      "STATE PRICE",
-      this.state.counts,
-      "STATE COUNTS"
-    );
     //recommendation takes the results of the other 2 functions as the arguments
     setTimeout(
       this.recommendationAlgorithm(this.state.price, this.state.counts),
       100000
     ); // push to store after
+    this.setState({ symbol: "" });
   };
 
   // form with inputs for: stock symbol, social network, time window (Default 10 days)
@@ -107,6 +100,7 @@ class UnconnectedForm extends Component {
             id="symbolInput"
             name="stock symbol"
             type="text"
+            value={this.state.symbol}
             onChange={this.handleSymbol}
           />
           <label htmlFor="social">Social Network:</label>

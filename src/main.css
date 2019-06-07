@@ -166,9 +166,12 @@ input[type="submit"]:focus {
 .table2 th {
   border: 2px solid #070707;
   padding: 3px 2px;
+  min-width: 98px;
 }
+
 .table2 tbody td {
   font-size: 16px;
+  background-color: white;
 }
 .table2 tfoot {
   font-weight: bold;
